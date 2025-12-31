@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+Go Local Health (snapshot)
+
+Usage:
+  go-local-health [--root PATH] [--scope PATTERN] [--check]
+
+Options:
+  --root PATH     Repository root (must contain go.mod). Defaults to nearest parent.
+  --scope PATTERN Go package pattern (default: ./...).
+  --check         Verify tools + repo root, then exit.
+  -h, --help      Show help.
+
+Notes:
+  - Non-interactive: no prompts, no TUI.
+  - Scope must be a single, non-empty token (no whitespace, no leading '-').
+USAGE
+}
+
+check_only=0
+root=""
+scope="./..."
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --root)
+      root="${2:-}"
+      shift 2
+      ;;
+    --scope)
+      scope="${2:-}"
+      shift 2
+      ;;
+    --check)
+      check_only=1
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+if [[ -z "$scope" ]]; then
+  echo "--scope cannot be empty" >&2
+  exit 2
+fi
+if [[ "$scope" == *$'\n'* || "$scope" == *$'\r'* ]]; then
+  echo "--scope must be a single line" >&2
+  exit 2
+fi
+if [[ "$scope" =~ [[:space:]] ]]; then
+  echo "--scope must not contain whitespace" >&2
+  exit 2
+fi
+if [[ "$scope" == -* ]]; then
+  echo "--scope must not start with '-'" >&2
+  exit 2
+fi
+
+find_go_root() {
+  local dir
+  dir="${PWD}"
+  while true; do
+    if [[ -f "$dir/go.mod" ]]; then
+      echo "$dir"
+      return 0
+    fi
+    if [[ "$dir" == "/" ]]; then
+      return 1
+    fi
+    dir="$(dirname "$dir")"
+  done
+}
+
+if [[ -n "$root" ]]; then
+  if [[ ! -d "$root" ]]; then
+    echo "--root does not exist: $root" >&2
+    exit 2
+  fi
+  root="$(cd "$root" && pwd)"
+else
+  if ! root="$(find_go_root)"; then
+    echo "go.mod not found; run from a Go repo or pass --root" >&2
+    exit 2
+  fi
+fi
+
+if [[ ! -f "$root/go.mod" ]]; then
+  echo "go.mod not found in --root: $root" >&2
+  exit 2
+fi
+
+require_tool() {
+  local tool
+  tool="$1"
+  if ! command -v "$tool" >/dev/null 2>&1; then
+    echo "Missing required tool: $tool" >&2
+    echo "Install or pin it, then re-run." >&2
+    exit 3
+  fi
+}
+
+require_tool go
+require_tool tparse
+require_tool golangci-lint
+
+if [[ $check_only -eq 1 ]]; then
+  echo "OK: go.mod at $root"
+  exit 0
+fi
+
+cd "$root"
+
+echo "Running tests with coverage (scope: $scope)"
+set +e
+go test -cover -json "$scope" | tparse
+TEST_STATUS=$?
+
+echo "Running golangci-lint (scope: $scope)"
+if ! golangci-lint run "$scope"; then
+  LINT_STATUS=1
+else
+  LINT_STATUS=0
+fi
+set -e
+
+if [[ $TEST_STATUS -ne 0 || $LINT_STATUS -ne 0 ]]; then
+  echo "Health check failed: tests=$TEST_STATUS lint=$LINT_STATUS" >&2
+  exit 1
+fi
+
+echo "Health check passed"
