@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Convenience wrapper for codex_sandbox.py
+#
+# Examples:
+#   scripts/codex-task fix-123
+#   scripts/codex-task fix-123 --launch
+#   scripts/codex-task feat-auth --launch -- --model gpt-5
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PY="${PYTHON:-python3}"
+
+exec "$PY" "$SCRIPT_DIR/codex_sandbox.py" new "$@"
