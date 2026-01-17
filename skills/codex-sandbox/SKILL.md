@@ -5,7 +5,7 @@ description: Create and manage per-task isolated git clones (sandboxes) for Code
 
 # Codex Sandboxes
 
-Create one directory per task and run Codex inside that directory. Prefer this over git worktrees when:
+Create one directory per task and run the agent inside that directory. Prefer this over git worktrees when:
 
 - Codex or other agents sometimes use the wrong current working directory.
 - You want full isolation for .env, node_modules, build outputs, ports, and dev servers.
@@ -25,27 +25,15 @@ Run the scripts from the skill folder, depending on where you installed it:
 
 Use `git rev-parse --show-toplevel` to get `$REPO_ROOT`.
 
-## Quick start
+## Quick start (agent-only)
 
-From inside any existing checkout of the repo:
+This skill is always invoked by an agent. Do not run it manually.
+
+Example command the agent should run:
 
 ```bash
 SKILL_DIR="$(git rev-parse --show-toplevel)/.codex/skills/codex-sandboxes"
 python3 "$SKILL_DIR/scripts/codex_sandbox.py" new fix-123
-```
-
-Launch Codex in the sandbox:
-
-```bash
-SKILL_DIR="$(git rev-parse --show-toplevel)/.codex/skills/codex-sandboxes"
-python3 "$SKILL_DIR/scripts/codex_sandbox.py" new fix-123 --launch
-```
-
-Or with the wrapper:
-
-```bash
-SKILL_DIR="$(git rev-parse --show-toplevel)/.codex/skills/codex-sandboxes"
-"$SKILL_DIR/scripts/codex-task" fix-123 --launch
 ```
 
 The command will:
@@ -56,7 +44,24 @@ The command will:
 4. Create/switch to a task branch from `origin/main`.
 5. Set upstream tracking to `origin/<branch>` (pushes once if needed).
 6. Install safety hooks that block commit/push on `main`/`master`.
-7. Optionally launch `codex` in the sandbox.
+
+## How to instruct the agent
+
+Always request this via the agent. Provide:
+
+- Task name (used for sandbox + branch name).
+- Any non-default base directory (e.g. `--base-dir ~/projects`).
+- Any non-default base branch or remote.
+
+If you do not provide extra details, the agent should use defaults. If the task name is ambiguous or missing, the agent should ask back.
+
+Example prompt to the agent:
+
+```
+Use codex-sandbox to create a sandbox for task "fix-123".
+Place it under ~/projects, base branch main.
+Command: python3 <skill_dir>/scripts/codex_sandbox.py new fix-123 --base-dir ~/projects --base-branch main
+```
 
 ## Concepts
 
@@ -71,7 +76,7 @@ Prefer: one writing session per sandbox.
 ## Create a sandbox
 
 ```bash
-python3 <skill_dir>/scripts/codex_sandbox.py new <task> [options] [-- <codex args>]
+python3 <skill_dir>/scripts/codex_sandbox.py new <task> [options]
 ```
 
 Common patterns:
@@ -80,17 +85,11 @@ Common patterns:
 # Create sandbox + branch and print its path
 python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth
 
-# Create sandbox + branch and launch Codex
-python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth --launch
-
 # Use a different base branch
 python3 <skill_dir>/scripts/codex_sandbox.py new fix-123 --base-branch develop
 
 # Copy .env.example to .env on creation
 python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth --env-copy
-
-# Pass extra arguments to Codex after --
-python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth --launch -- --model gpt-5
 ```
 
 Key options:
@@ -102,7 +101,6 @@ Key options:
 - `--base-branch NAME`: Base branch to branch from (default: `main`).
 - `--branch NAME`: Explicit branch name (default: derived from `<task>`).
 - `--env-copy`: Copy `.env.example` to `.env` if present and `.env` missing.
-- `--launch`: Run `codex` with `cwd` set to the sandbox.
 
 ## List, inspect, remove
 
@@ -124,14 +122,14 @@ Follow these rules in every run:
 
 If the sandbox is currently on `main`/`master`, the tool will refuse to proceed unless you pass `--allow-main`.
 
-## Multiple Codex sessions
+## Multiple sessions
 
 If you want multiple sessions for one workset, create multiple sandboxes:
 
 ```bash
-python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-ui-1 --launch
-python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-ui-2 --launch
-python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-core-1 --launch
+python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-ui-1
+python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-ui-2
+python3 <skill_dir>/scripts/codex_sandbox.py new feat-auth-core-1
 ```
 
 Avoid running two writing sessions in the same sandbox.
