@@ -18,6 +18,23 @@ Keep your skills in a single source of truth and automatically sync them to Clau
 
 ---
 
+## 📦 Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| **codex-sandbox** | Create and manage per-task isolated git clones (sandboxes) for Codex CLI sessions, with automatic branch creation and safety hooks that block committing/pushing on main/master. |
+| **create-new-static-website** | Create a new GitHub repo from instructa/astro-website-starter using gitpick, initialize git, and push to GitHub. |
+| **debug-lldb** | Capture and analyze thread backtraces with LLDB/GDB to debug hangs, deadlocks, UI freezes, IPC stalls, or high-CPU loops. |
+| **gh-repo-bootstrap** | Create a new GitHub repository with the gh CLI and bootstrap a local project with git init, README, remote setup, and initial push. |
+| **git-safe-workflow** | Safely inspect, stage, commit, and (only if asked) push changes made by an AI agent. Includes worktree safety and merge conflict handling. |
+| **gitwhat** | Concise git workspace snapshot for the current directory showing branch, repo root, worktree status, and dirty state. |
+| **go-local-health** | Run local Go health checks (tests, coverage, lint) using tools like lazygotest, gocovsh, tparse, and golangci-lint. |
+| **homebrew-publish** | Publish CLIs/TUIs to Homebrew via a personal tap. Create formulae for Go, Rust, Node/TypeScript, Python, or prebuilt binaries. |
+| **redesign-my-landingpage** | Build, critique, and iterate high-converting landing pages using React + Vite + TypeScript + Tailwind + shadcn/ui with Iconify icons. |
+| **shellck** | Run shellcheck on shell scripts to catch issues like unset vars, bad subshell usage, or quoting mistakes. |
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Fork this repo
@@ -102,7 +119,6 @@ find skills -type f | entr -r ./sync-skills.sh
 | Best of both | Use Git hooks + run watcher when actively editing |
 
 ---
-
 
 ## Links
 

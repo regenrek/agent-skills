@@ -1,5 +1,5 @@
 ---
-name: shadcn-vite-iconify-landing-page
+name: redesign-my-landingpage
 description: Build, critique, and iterate high-converting marketing or product landing pages using React + Vite + TypeScript + Tailwind and shadcn/ui components, with all icons sourced from Iconify. Use when the user asks for a landing page, sales page, signup page, CRO improvements, above-the-fold vs below-the-fold structure, hero + CTA copy, section order, or wants production-ready shadcn + Vite code.
 ---
 
