@@ -5,7 +5,9 @@ description: Run Codex CLI for deep code analysis and second-opinion reviews. Us
 
 # Codex Analysis
 
-Run the Codex CLI to get deep analysis using gpt-5.2-codex with high reasoning effort. This model can spawn subagents for parallel exploration.
+Run the Codex CLI to get deep analysis using gpt-5.2-codex with high reasoning effort.
+
+**IMPORTANT: This skill MUST spawn subagents for parallel exploration. Always include subagent instructions in the prompt.**
 
 ## When to Use
 
@@ -13,38 +15,39 @@ Run the Codex CLI to get deep analysis using gpt-5.2-codex with high reasoning e
 - User wants a second opinion on code or architecture
 - User needs deep reasoning on a complex problem
 
-## Running the Analysis
+## Running the Analysis (MUST spawn subagents)
 
-Execute this command, replacing `{PROMPT}` with the user's question or analysis request:
+Execute this command, replacing `{PROMPT}` with the user's question or analysis request.
+
+**Always append subagent instructions to the prompt:**
 
 ```bash
 codex exec -m gpt-5.2-codex \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
   --skip-git-repo-check \
-  "{PROMPT}"
+  "{PROMPT} Spawn subagents to explore different aspects in parallel."
 ```
 
 ## Command Parameters
 
 | Flag | Purpose |
 |------|---------|
-| `-m gpt-5.2-codex` | Use gpt-5.2-codex model (default worker model, can spawn subagents) |
+| `-m gpt-5.2-codex` | Use gpt-5.2-codex model (spawns subagents for parallel work) |
 | `--config model_reasoning_effort="high"` | Maximum reasoning depth |
 | `--sandbox read-only` | Safe read-only sandbox |
 | `--skip-git-repo-check` | Skip git repository validation |
 
-## Subagent Spawning
+## Subagent Requirements
 
-For complex analysis tasks, include "spawn subagents" in your prompt to enable parallel exploration:
+**MANDATORY:** Every prompt MUST include instructions to spawn subagents. This enables:
 
-```bash
-codex exec -m gpt-5.2-codex \
-  --config model_reasoning_effort="high" \
-  --sandbox read-only \
-  --skip-git-repo-check \
-  "Analyze {topic}. Spawn subagents to explore different areas in parallel."
-```
+- Parallel exploration of different code areas
+- Concurrent analysis of multiple concerns (security, performance, architecture)
+- Faster and more thorough analysis
+
+Template suffix to append to every prompt:
+> "Spawn subagents to explore different aspects in parallel."
 
 ## After Running
 
@@ -59,13 +62,24 @@ codex exec -m gpt-5.2-codex \
 
 User asks: "Use Codex to analyze the authentication flow"
 
-Run:
+Run (note: subagent spawning is REQUIRED):
 ```bash
 codex exec -m gpt-5.2-codex \
   --config model_reasoning_effort="high" \
   --sandbox read-only \
   --skip-git-repo-check \
   "Analyze the authentication flow in this codebase. Spawn subagents to explore security issues, improvement opportunities, and best practices in parallel."
+```
+
+User asks: "Get Codex help with performance issues"
+
+Run:
+```bash
+codex exec -m gpt-5.2-codex \
+  --config model_reasoning_effort="high" \
+  --sandbox read-only \
+  --skip-git-repo-check \
+  "Identify performance bottlenecks in this codebase. Spawn subagents to analyze database queries, API endpoints, and frontend rendering in parallel."
 ```
 
 Then summarize findings and offer follow-up actions.
