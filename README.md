@@ -30,6 +30,7 @@ Keep your skills in a single source of truth and automatically sync them to Clau
 | **git-safe-workflow** | Safely inspect, stage, commit, and (only if asked) push changes made by an AI agent. Includes worktree safety and merge conflict handling. |
 | **gitwhat** | Concise git workspace snapshot for the current directory showing branch, repo root, worktree status, and dirty state. |
 | **go-local-health** | Run local Go health checks (tests, coverage, lint) using tools like lazygotest, gocovsh, tparse, and golangci-lint. |
+| **hard-cut** | Enforce a hard-cut product policy: keep one canonical current-state implementation and remove compatibility, migration, fallback, adapter, and dual-behavior code unless transition support is explicitly requested. |
 | **homebrew-publish** | Publish CLIs/TUIs to Homebrew via a personal tap. Create formulae for Go, Rust, Node/TypeScript, Python, or prebuilt binaries. |
 | **pr-commiter** | Agentic PR committer with deterministic commits, enforced branch/PR workflow, and explicit paths (no git add .). |
 | **redesign-my-landingpage** | Build, critique, and iterate high-converting landing pages using React + Vite + TypeScript + Tailwind + shadcn/ui with Iconify icons. |
