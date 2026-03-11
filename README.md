@@ -34,6 +34,7 @@ Keep your skills in a single source of truth and automatically sync them to Clau
 | **homebrew-publish** | Publish CLIs/TUIs to Homebrew via a personal tap. Create formulae for Go, Rust, Node/TypeScript, Python, or prebuilt binaries. |
 | **pr-commiter** | Agentic PR committer with deterministic commits, enforced branch/PR workflow, and explicit paths (no git add .). |
 | **redesign-my-landingpage** | Build, critique, and iterate high-converting landing pages using React + Vite + TypeScript + Tailwind + shadcn/ui with Iconify icons. |
+| **root-cause-finder** | Perform root-cause-first debugging by tracing expected behavior to the first unintended side effect before changing contracts, parsing, or types. |
 | **security-leak-guardrails** | Set up secret-leak prevention guardrails with forbidden path checks, gitleaks config, CI secret scanning, and dependency updates. |
 | **shellck** | Run shellcheck on shell scripts to catch issues like unset vars, bad subshell usage, or quoting mistakes. |
 
