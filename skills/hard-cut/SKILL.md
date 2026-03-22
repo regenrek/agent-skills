@@ -29,6 +29,6 @@ Apply a hard-cut policy as the default decision filter for product and architect
 
 - Remove dead migration and fallback code once the canonical path exists.
 - Collapse duplicated validation or policy logic into one source of truth.
-- Replace silent fallback with an explicit error, assertion, or recovery instruction.
+- Replace silent fallback with an explicit error, assertion, or mark as removed entirely if not needed anymore.
 - Prefer invalid-state diagnostics over best-effort parsing or coercion.
 - Call out any unavoidable temporary compatibility code in the final summary or PR body.
