@@ -1,0 +1,6 @@
+interface:
+  display_name: "Find Duplicate Ownership"
+  short_description: "Audit SSOT drift and competing owners"
+  default_prompt: "Use $find-duplicate-ownership to audit this codebase for duplicate ownership and hidden second sources of truth."
+policy:
+  allow_implicit_invocation: true
