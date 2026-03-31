@@ -1,34 +1,65 @@
 ---
 name: hard-cut
-description: "Enforce a hard-cut product policy: keep one canonical current-state implementation and delete compatibility, migration, fallback, adapter, and dual-behavior code unless the user explicitly asks for transition support. Use when a task changes product behavior, persisted state, startup recovery, routing, contracts, configuration, schema or enum shapes, feature flags, or architecture where old-state compatibility might otherwise be preserved."
+description: "Enforce a hard-cut cleanup policy: keep one canonical implementation and delete compatibility, migration, fallback, adapter, coercion, and dual-shape code. Use when refactoring pre-release or internal-draft codepaths to one final shape, or when a task changes product behavior, persisted state, routing, contracts, configuration, schema or enum shapes, feature flags, or architecture where old-state compatibility might otherwise be preserved. Default assumption: prior shapes are internal drafts unless the code proves a real external compatibility boundary."
 ---
 
 # Hard-Cut Policy
 
-## Overview
+Apply a hard-cut policy as the default decision filter for product and architecture changes.
 
-Apply a hard-cut policy as the default decision filter for product and architecture changes. Keep one current-state codepath, fail fast on invalid old state, and prefer explicit recovery steps over compatibility logic.
+Keep one canonical codepath. Remove old-shape handling. Do not preserve draft or legacy behavior unless the code proves there is a real external or public compatibility boundary.
 
-## Operating Rules
+## Core policy
 
-- Treat historical local state as non-authoritative unless the user explicitly requests migration or compatibility support.
-- Delete compatibility bridges, fallback paths, dual reads/writes, adapter layers, old enum aliases, legacy route parsing, and silent coercions when touching the primary codepath.
-- Update contracts, validation, flags, constants, and configuration in one canonical location. Do not preserve parallel policy logic.
-- Fail fast when persisted state, inputs, or contracts do not match the canonical format.
-- Prefer explicit operator or user recovery steps over automatic migration.
-- If a change makes old local state invalid, surface that clearly and keep the canonical implementation clean.
+Treat previous shapes as internal draft shapes unless the code proves they are already persisted external or user data, or a public supported contract.
 
-## Decision Test
+When an old shape appears, remove that path and convert the codebase to the canonical shape. Do not add code to support it. Do not add code specifically to reject it just because it once existed.
 
-1. Ask whether there is a real external-user compatibility requirement.
-2. If not, remove the old path and keep only the canonical current-state behavior.
-3. If yes because the user explicitly asked for transition support, keep it narrow and temporary.
-4. In the same diff, state why the compatibility code exists, why the canonical path is insufficient, the exact deletion criteria, and the tracking ADR or task.
+## Hard rules
+
+Apply these rules in order:
+
+1. Do not add fallback behavior.
+2. Do not add compatibility branches.
+3. Do not add shims, adapters, coercions, or dual-shape support.
+4. Do not add fail-fast guards whose purpose is to detect or reject old shapes.
+5. Do not add tests whose purpose is to assert rejection of old or legacy shapes.
+6. Prefer deleting old-shape handling over preserving or policing it.
+7. Update producers, consumers, fixtures, and tests to use only the canonical shape.
+8. Remove dead code, dead conditionals, and obsolete comments related to old shapes.
+9. Keep validation only when it is already needed for correctness of the current canonical contract.
+10. When choosing between backward compatibility and simplification, choose simplification.
+
+## Execution workflow
+
+1. Identify the canonical target shape.
+2. Trace every producer and consumer of that shape.
+3. Update all live codepaths to emit and consume only the canonical shape.
+4. Update fixtures, test data, builders, and snapshots to the canonical shape.
+5. Delete legacy handling, branching, comments, and helpers.
+6. Keep only current-shape validation that is still required for correctness.
+7. If a real external compatibility boundary exists, stop and call out the exact file, data boundary, and reason it cannot be removed yet.
 
 ## Review Checklist
 
-- Remove dead migration and fallback code once the canonical path exists.
-- Collapse duplicated validation or policy logic into one source of truth.
-- Replace silent fallback with an explicit error, assertion, or mark as removed entirely if not needed anymore.
-- Prefer invalid-state diagnostics over best-effort parsing or coercion.
-- Call out any unavoidable temporary compatibility code in the final summary or PR body.
+- Reject changes that preserve old-shape behavior behind conditionals.
+- Reject translation layers between old and new shapes.
+- Reject validation branches added only to reject legacy inputs.
+- Remove dead helpers and comments that describe removed draft formats.
+- Keep one owner for the canonical contract.
+
+## Deliverables
+
+Deliver only:
+
+- A minimal implementation that supports the canonical shape.
+- Updated tests for the canonical shape only.
+- Removal of obsolete legacy-shape tests.
+- No new rejection tests for old shapes.
+- No runtime logic dedicated to recognizing legacy formats.
+
+## Exception rule
+
+Make an exception only when removing the old shape would break already persisted external or user data, or a real public contract.
+
+In that case, do not invent a shim. Call out the exact location and explain why it is a true external compatibility boundary.
