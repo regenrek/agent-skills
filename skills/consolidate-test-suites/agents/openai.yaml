@@ -1,0 +1,7 @@
+interface:
+  display_name: "Consolidate Test Suites"
+  short_description: "Place bug-fix coverage in canonical suites."
+  default_prompt: "Use $consolidate-test-suites to decide where bug-fix coverage belongs and consolidate scattered regression tests into canonical suites."
+
+policy:
+  allow_implicit_invocation: true

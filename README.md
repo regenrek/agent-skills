@@ -25,6 +25,7 @@ Keep your skills in a single source of truth and automatically sync them to Clau
 | **architecture-ownership** | Determine runtime owner, first-fix layer, and canonical long-term module or package owner in layered codebases. |
 | **codex-analysis** | Run Codex CLI for deep code analysis and second-opinion reviews using GPT-5.2 with high reasoning effort. |
 | **codex-sandbox** | Create and manage per-task isolated git clones (sandboxes) for Codex CLI sessions, with automatic branch creation and safety hooks that block committing/pushing on main/master. |
+| **consolidate-test-suites** | Decide where automated test coverage belongs after a bug fix or architectural change. Choose between unit, integration, end-to-end, or standalone regression tests while reducing duplicate bug guards. |
 | **create-new-static-website** | Create a new GitHub repo from instructa/astro-website-starter using gitpick, initialize git, and push to GitHub. |
 | **debug-lldb** | Capture and analyze thread backtraces with LLDB/GDB to debug hangs, deadlocks, UI freezes, IPC stalls, or high-CPU loops. |
 | **find-duplicate-ownership** | Audit layered codebases for duplicate ownership, hidden second sources of truth, and competing rule owners. |
