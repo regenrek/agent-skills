@@ -1,68 +1,102 @@
 ---
 name: consolidate-test-suites
-description: Decide where automated test coverage belongs after a bug fix or architectural change. Use when Codex needs to choose between unit, integration, end-to-end, or standalone regression tests; fold scattered regression tests into canonical suites; reduce duplicate bug guards; or keep test ownership aligned with the layer that owns the invariant.
+description: Decide exactly where bug-fix test coverage belongs. Use before adding, moving, or deleting tests after a bug fix or architectural change. Select one owning layer, reuse existing canonical suites, block redundant or weakly placed tests, and remove weaker duplicates.
 ---
 
 # Consolidate Test Suites
 
-Keep bug-fix coverage in the smallest set of canonical suites that proves the owned invariant. Prefer integration or behavior tests at the ownership boundary over creating scattered standalone regression suites.
+Purpose: place each invariant in one owning test layer only.
 
-## Decision Rule
+Definitions:
+- Invariant: the rule that must stay true.
+- Owning layer: the lowest layer that truly owns and can prove that rule.
+- Canonical suite: the normal existing suite for that owning layer.
 
-1. Identify the invariant that actually failed.
-2. Identify the layer that owns that invariant.
-3. Put the test in the canonical suite for that layer.
-4. Add a standalone regression test only if no existing canonical suite can cover the case cleanly and deterministically.
-5. Remove duplicated tests that assert the same invariant at weaker or noisier layers.
+Default: reuse an existing canonical suite. Do not create a new standalone regression test unless the exception rule below allows it.
 
-## Ownership Heuristics
+## Hard Rules
 
-- Use a unit test when one module owns the rule and the bug can be reproduced without transport, I/O, or orchestration.
-- Use an integration test when the bug appears at a boundary between components, or the invariant depends on ordering, replay, persistence, IPC, retries, serialization, or lifecycle.
-- Use an end-to-end test only when the user-visible contract cannot be trusted from lower-layer tests alone.
-- Keep protocol, schema, and validation rules in the suite that owns the contract.
-- Do not duplicate the same invariant in unit, integration, and end-to-end tests unless each layer owns a different failure mode.
+- You MUST identify the invariant before adding or moving any test.
+- You MUST identify exactly one owning layer: unit, integration, or end-to-end.
+- You MUST first try to place coverage in an existing canonical suite for that layer.
+- You MUST prefer editing an existing test file over creating a new test file.
+- You MUST NOT add the same invariant in multiple layers unless each layer covers a different failure mode. If you keep more than one layer, name the distinct failure mode for each.
+- You MUST NOT add tests that lock in implementation details unless that implementation unit itself owns the invariant.
+- You MUST NOT create a standalone regression test because it is faster or easier.
+- If you cannot name the invariant and the owning layer, STOP. Report that placement is not justified.
 
-## Early-Stage Bias
+## Required Decision Order
 
-When architecture is still moving, bias toward fewer high-signal tests:
+Choose the first option that fits:
 
-- Fold bug-fix coverage into existing standard suites when possible.
-- Avoid creating a new `regression` test file or suite for every architecture change.
-- Keep tests close to the single source of truth for the rule.
-- Prefer behavior-focused names over bug-history names.
+1. Add to an existing test in an existing file in the owning layer.
+2. Add a new test to an existing canonical file in the owning layer.
+3. Create a new file inside the existing canonical suite in the owning layer.
+4. Create a standalone regression-style test only if the Exception Rule passes.
 
-This is not "test less". It is "reduce test scatter and drift".
+## Owning Layer Rules
 
-## When To Keep A Separate Regression Test
+Choose unit when:
+- one module owns the rule, and
+- the bug reproduces without I/O, transport, persistence, retries, IPC, orchestration, or lifecycle coupling.
 
-Keep or add a dedicated regression-style test when one of these is true:
+Choose integration when:
+- the rule lives at a boundary between components, or
+- the bug depends on serialization, persistence, ordering, replay, retries, IPC, process lifecycle, or multi-component coordination.
 
-- The bug is historically fragile and easy to reintroduce.
-- The reproduction is narrow, deterministic, and hard to express naturally inside an existing suite.
-- The canonical suite would become confusing or overloaded by absorbing it.
-- The test documents an external contract or incident with long-term support value.
+Choose end-to-end only when:
+- the user-visible contract cannot be trusted from lower-layer tests alone.
 
-If these do not apply, fold the coverage into the normal suite.
+Tie-breakers:
+- If torn between unit and integration, choose integration.
+- Never choose end-to-end to compensate for uncertainty.
+- Never choose a higher layer just because it is easier to reproduce there.
 
-## Consolidation Workflow
+## Exception Rule for Standalone Regression Tests
 
-When asked to clean up test sprawl:
+A standalone regression-style test is allowed only if ALL are true:
 
-1. Inventory the tests that cover the same behavior.
-2. Group them by owned invariant, not by file name.
-3. Keep the strongest canonical test location.
-4. Merge useful assertions into that suite.
-5. Delete or collapse duplicates.
-6. Rename tests to describe behavior and ownership, not ticket history.
-7. Re-run the relevant test and typecheck/build flows.
+- no existing canonical suite can express the case cleanly
+- the reproduction is deterministic
+- the case has durable incident or contract value
+- adding it to the canonical suite would make that suite less clear
 
-## Output Shape
+If any condition is false, fold the coverage into the canonical suite.
 
-When advising or editing, state:
+## Duplicate Cleanup
 
-- the invariant
-- the owning layer
-- the target suite
-- whether to fold, keep, or delete existing regression-style coverage
-- the residual risk if coverage remains intentionally thin
+After placing coverage:
+
+1. Search for tests that assert the same invariant.
+2. Keep the strongest owned location.
+3. Merge any unique assertions into that location.
+4. Delete or simplify weaker duplicates.
+5. Rename tests by behavior and owner, not by ticket number or bug history.
+
+## Verification
+
+Before finishing:
+
+1. Run the narrowest relevant test target first.
+2. Run required typecheck, build, or lint steps for touched code.
+3. Report exactly what was run and whether it passed.
+
+## Required Output
+
+Reply in exactly this format:
+
+Invariant: <rule that failed>
+
+Owning layer: <unit | integration | end-to-end>
+
+Target suite/file: <path or suite name>
+
+Action: <reuse existing test | add to existing suite | create file in canonical suite | keep standalone regression>
+
+Why this layer owns it: <one short paragraph>
+
+Duplicates to merge/delete: <list or "none">
+
+Verification run: <commands and result>
+
+Residual risk: <what is still not covered, if anything>
