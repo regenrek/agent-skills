@@ -17,7 +17,7 @@ Default: reuse an existing canonical suite. Do not create a new standalone regre
 ## Hard Rules
 
 - You MUST identify the invariant before adding or moving any test.
-- You MUST identify exactly one owning layer: unit, integration, or end-to-end.
+- You MUST identify one primary owning layer: unit, integration, or end-to-end.
 - You MUST first try to place coverage in an existing canonical suite for that layer.
 - You MUST prefer editing an existing test file over creating a new test file.
 - You MUST NOT add the same invariant in multiple layers unless each layer covers a different failure mode. If you keep more than one layer, name the distinct failure mode for each.
@@ -81,9 +81,9 @@ Before finishing:
 2. Run required typecheck, build, or lint steps for touched code.
 3. Report exactly what was run and whether it passed.
 
-## Required Output
+## Default Output Format
 
-Reply in exactly this format:
+Use this format by default:
 
 Invariant: <rule that failed>
 
