@@ -22,6 +22,7 @@ Keep your skills in a single source of truth and automatically sync them to Clau
 
 | Skill | Description |
 |-------|-------------|
+| **app-spec-packager** | Create production-ready app specification packages for AI coding agents, including product spec, UX flows, architecture, privacy/security, QA, release readiness, and executable build tasks. |
 | **architecture-ownership** | Determine runtime owner, first-fix layer, and canonical long-term module or package owner in layered codebases. |
 | **codex-analysis** | Run Codex CLI for deep code analysis and second-opinion reviews using GPT-5.2 with high reasoning effort. |
 | **codex-sandbox** | Create and manage per-task isolated git clones (sandboxes) for Codex CLI sessions, with automatic branch creation and safety hooks that block committing/pushing on main/master. |

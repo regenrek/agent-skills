@@ -30,7 +30,7 @@ sync_one_dest() {
 
     # -aL: archive + dereference symlinks (copy targets)
     # --delete: ONLY deletes inside $dest/$name, never the whole dest
-    rsync -aL --delete "$d" "$dest/$name/"
+    rsync -aL --delete --exclude='.DS_Store' "$d" "$dest/$name/"
   done
   shopt -u nullglob
 }

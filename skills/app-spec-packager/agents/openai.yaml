@@ -1,0 +1,4 @@
+interface:
+  display_name: "App Spec Packager"
+  short_description: "Create production-ready app spec packages"
+  default_prompt: "Use $app-spec-packager to turn this application idea into a production-ready Markdown specification package with architecture, privacy/safety, API/data model, QA, and executable coding-agent tasks."
