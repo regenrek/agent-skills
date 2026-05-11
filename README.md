@@ -1,144 +1,83 @@
-<div align="center">
+# Agent Skills
 
-# 🧠 Agent Skills
+A curated source repo for AgentRig plugins and standalone skills.
 
-**One repo. All your AI agents. Always in sync.**
+This repo is organized around AgentRig distribution instead of local sync scripts:
 
-Keep your skills in a single source of truth and automatically sync them to Claude, Codex, and other AI agents.
+- `plugins/`: installable AgentRig plugin bundles.
+- `skills/`: standalone skills that can be listed and installed independently.
+- `internal/`: personal or experimental workflows that are not part of the public install surface.
 
-</div>
+## Install
 
----
+Install the core engineering bundle:
 
-## ✨ Why?
-
-- 📁 **Single source of truth** — one skills repo to rule them all
-- 🔄 **Auto-sync via Git hooks** — commit, pull, or switch branches and you're done
-- ⚡ **Optional file watcher** — instant sync while editing
-
----
-
-## 📦 Available Skills
-
-| Skill | Description |
-|-------|-------------|
-| **app-spec-packager** | Create production-ready app specification packages for AI coding agents, including product spec, UX flows, architecture, privacy/security, QA, release readiness, and executable build tasks. |
-| **architecture-ownership** | Determine runtime owner, first-fix layer, and canonical long-term module or package owner in layered codebases. |
-| **codex-analysis** | Run Codex CLI for deep code analysis and second-opinion reviews using GPT-5.2 with high reasoning effort. |
-| **codex-sandbox** | Create and manage per-task isolated git clones (sandboxes) for Codex CLI sessions, with automatic branch creation and safety hooks that block committing/pushing on main/master. |
-| **consolidate-test-suites** | Decide where automated test coverage belongs after a bug fix or architectural change. Choose between unit, integration, end-to-end, or standalone regression tests while reducing duplicate bug guards. |
-| **create-new-static-website** | Create a new GitHub repo from instructa/astro-website-starter using gitpick, initialize git, and push to GitHub. |
-| **debug-lldb** | Capture and analyze thread backtraces with LLDB/GDB to debug hangs, deadlocks, UI freezes, IPC stalls, or high-CPU loops. |
-| **find-duplicate-ownership** | Audit layered codebases for duplicate ownership, hidden second sources of truth, and competing rule owners. |
-| **gh-repo-bootstrap** | Create a new GitHub repository with the gh CLI and bootstrap a local project with git init, README, remote setup, and initial push. |
-| **git-safe-workflow** | Safely inspect, stage, commit, and (only if asked) push changes made by an AI agent. Includes worktree safety and merge conflict handling. |
-| **gitwhat** | Concise git workspace snapshot for the current directory showing branch, repo root, worktree status, and dirty state. |
-| **go-local-health** | Run local Go health checks (tests, coverage, lint) using tools like lazygotest, gocovsh, tparse, and golangci-lint. |
-| **hard-cut** | Enforce a hard-cut product policy: keep one canonical current-state implementation and remove compatibility, migration, fallback, adapter, and dual-behavior code unless transition support is explicitly requested. |
-| **homebrew-publish** | Publish CLIs/TUIs to Homebrew via a personal tap. Create formulae for Go, Rust, Node/TypeScript, Python, or prebuilt binaries. |
-| **pr-commiter** | Agentic PR committer with deterministic commits, enforced branch/PR workflow, and explicit paths (no git add .). |
-| **redesign-my-landingpage** | Build, critique, and iterate high-converting landing pages using React + Vite + TypeScript + Tailwind + shadcn/ui with Iconify icons. |
-| **root-cause-finder** | Perform root-cause-first debugging by tracing expected behavior to the first unintended side effect before changing contracts, parsing, or types. |
-| **security-leak-guardrails** | Set up secret-leak prevention guardrails with forbidden path checks, gitleaks config, CI secret scanning, and dependency updates. |
-| **shellck** | Run shellcheck on shell scripts to catch issues like unset vars, bad subshell usage, or quoting mistakes. |
-
----
-
-## 🚀 Quick Start
-
-### 1. Fork this repo
-
-Click the **Fork** button above, then clone your fork:
-
-> 💡 Each developer maintains their own skills — fork it, make it yours!
-
-### 2. Add your skills
-
+```bash
+agentrig plugin install cursor agentrig/regenrek.agentic-engineer-core
 ```
+
+Install selected skills from the bundle:
+
+```bash
+agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership --pick skill:hard-cut
+```
+
+Replace `cursor` with another supported provider when needed.
+
+## Plugins
+
+### `regenrek.agentic-engineer-core`
+
+Core agentic engineering skills for architecture, debugging, refactoring, and test ownership.
+
+Included skills:
+
+- `architecture-ownership`: determine the right runtime, first-fix, and canonical long-term owner.
+- `consolidate-test-suites`: place bug-fix coverage in one owning test layer.
+- `find-duplicate-ownership`: audit duplicate ownership and hidden second sources of truth.
+- `hard-cut`: keep one canonical implementation during pre-release refactors.
+- `root-cause-finder`: trace downstream errors to the first unintended side effect.
+
+## Standalone Skills
+
+These skills are kept as separate artifacts because they are useful independently:
+
+- `app-spec-packager`: create production-ready app specification packages for coding agents.
+- `debug-lldb`: capture and analyze LLDB/GDB backtraces for hangs and high-CPU loops.
+- `gh-repo-bootstrap`: create a GitHub repo and bootstrap a local project.
+- `git-safe-workflow`: inspect, stage, commit, and push safely when explicitly requested.
+- `gitwhat`: print a compact git workspace snapshot.
+- `go-local-health`: run local Go test, coverage, and lint health checks.
+- `homebrew-publish`: prepare Homebrew tap formulae for CLI/TUI releases.
+- `redesign-my-landingpage`: build and critique shadcn/Vite/Iconify landing pages.
+- `security-leak-guardrails`: add secret-leak prevention guardrails.
+- `shellck`: run shellcheck over shell scripts.
+
+## Repository Layout
+
+```text
+plugins/
+  regenrek.agentic-engineer-core/
+    .plugin/plugin.json
+    README.md
+    skills/
+
 skills/
-└── <skill-name>/
-    └── SKILL.md
+  app-spec-packager/
+  debug-lldb/
+  ...
+
+internal/
+  codex-analysis/
+  codex-sandbox/
+  create-new-static-website/
+  pr-commiter/
 ```
-
-### 3. Run the sync
-
-```bash
-chmod +x ./sync-skills.sh
-./sync-skills.sh
-```
-
-Your skills are now synced to:
-- `~/.claude/skills/`
-- `~/.codex/skills/`
-
----
-
-## 🔧 How It Works
-
-The `sync-skills.sh` script uses `rsync` to mirror your skills folder:
-
-| Flag | Purpose |
-|------|---------|
-| `-a` | Preserves structure and timestamps |
-| `-L` | Follows symlinks (copies real files) |
-| `--delete` | Removes files in destination not in source |
-
----
-
-## ⚙️ Automation
-
-### Option A: Git Hooks (recommended)
-
-Already configured in `.githooks/`. Enable them with:
-
-```bash
-git config core.hooksPath .githooks
-chmod +x .githooks/post-commit .githooks/post-merge .githooks/post-checkout
-```
-
-Now your skills sync automatically when you:
-- ✅ `git commit`
-- ✅ `git pull` / `git merge`
-- ✅ `git checkout`
-
-### Option B: File Watcher (instant sync)
-
-For live sync while editing, run a watcher in your terminal:
-
-**Using [watchexec](https://github.com/watchexec/watchexec)** (cross-platform):
-
-```bash
-watchexec -w skills -- ./sync-skills.sh
-```
-
-**Using [entr](https://eradman.com/entrproject/)** (simple):
-
-```bash
-find skills -type f | entr -r ./sync-skills.sh
-```
-
----
-
-## 💡 Recommendation
-
-| Workflow | Solution |
-|----------|----------|
-| Normal development | **Git hooks** — set it and forget it |
-| Rapid iteration | **File watcher** — see changes instantly |
-| Best of both | Use Git hooks + run watcher when actively editing |
-
----
 
 ## Links
 
 - X/Twitter: [@kregenrek](https://x.com/kregenrek)
 - Bluesky: [@kevinkern.dev](https://bsky.app/profile/kevinkern.dev)
-
-## Courses
 - Learn Cursor AI: [Ultimate Cursor Course](https://www.instructa.ai/en/cursor-ai)
 - Learn to build software with AI: [AI Builder Hub](https://www.instructa.ai)
-
-## See my other projects:
-
-* [codefetch](https://github.com/regenrek/codefetch) - Turn code into Markdown for LLMs with one simple terminal command
-* [instructa](https://github.com/orgs/instructa/repositories) - Instructa Projects

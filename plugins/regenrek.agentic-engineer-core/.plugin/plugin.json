@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agentrig.ai/schema/plugin.v1.json",
+  "name": "regenrek.agentic-engineer-core",
+  "version": "0.1.0",
+  "description": "Core agentic engineering skills for architecture ownership, root-cause debugging, hard-cut refactors, duplicate ownership audits, and test-suite consolidation.",
+  "author": {
+    "name": "Kevin Kern"
+  },
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "debugging",
+    "refactoring",
+    "testing",
+    "ownership",
+    "agentic-engineering"
+  ],
+  "x-agentrig": {
+    "displayName": "Agentic Engineer Core",
+    "kind": "plugin",
+    "configSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "pluginDependencies": []
+  }
+}
