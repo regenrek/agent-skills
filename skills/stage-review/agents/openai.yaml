@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stage Review"
+  short_description: "Commit locally, then run no-mistakes review"
+  default_prompt: "Use $stage-review to stage this finished feature, create a Conventional Commit, and run it through no-mistakes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "No Mistakes"
+  short_description: "Use the no-mistakes gated push workflow"
+  default_prompt: "Use $no-mistakes to check this repository's gated push state and guide the next no-mistakes workflow step."

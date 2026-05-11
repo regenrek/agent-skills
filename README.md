@@ -50,9 +50,11 @@ These skills are kept as separate artifacts because they are useful independentl
 - `gitwhat`: print a compact git workspace snapshot.
 - `go-local-health`: run local Go test, coverage, and lint health checks.
 - `homebrew-publish`: prepare Homebrew tap formulae for CLI/TUI releases.
+- `no-mistakes`: use the no-mistakes gated push workflow.
 - `redesign-my-landingpage`: build and critique shadcn/Vite/Iconify landing pages.
 - `security-leak-guardrails`: add secret-leak prevention guardrails.
 - `shellck`: run shellcheck over shell scripts.
+- `stage-review`: commit a finished feature locally, then run it through no-mistakes.
 
 ## Repository Layout
 
