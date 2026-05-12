@@ -1,0 +1,7 @@
+interface:
+  display_name: "Package security check"
+  short_description: "Audit package installs and JS supply-chain policy"
+  default_prompt: "Use $package-security-check to audit this repo, report traffic-light findings first, and wait before changing files or running install/update commands."
+
+policy:
+  allow_implicit_invocation: false

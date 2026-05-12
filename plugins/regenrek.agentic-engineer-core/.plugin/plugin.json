@@ -18,6 +18,9 @@
   "x-agentrig": {
     "displayName": "Agentic Engineer Core",
     "kind": "plugin",
+    "listing": {
+      "category": "Development"
+    },
     "configSchema": {
       "type": "object",
       "additionalProperties": false,

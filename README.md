@@ -27,9 +27,9 @@ Install one bundled skill:
 npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
 npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
 npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
 npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
 npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:search-context
 ```
 
 Install one standalone skill:
@@ -43,7 +43,7 @@ npx agentrig skill install codex agentrig/regenrek.gitwhat
 npx agentrig skill install codex agentrig/regenrek.go-local-health
 npx agentrig skill install codex agentrig/regenrek.homebrew-publish
 npx agentrig skill install codex agentrig/regenrek.no-mistakes
-npx agentrig skill install codex agentrig/regenrek.package-security-check
+npx skills add instructa/agent-skills --skill package-security-check --agent codex
 npx agentrig skill install codex agentrig/regenrek.redesign-my-landingpage
 npx agentrig skill install codex agentrig/regenrek.security-leak-guardrails
 npx agentrig skill install codex agentrig/regenrek.shellck
@@ -66,9 +66,9 @@ Install one bundled skill:
 npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
 npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
 npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
 npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
 npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:search-context
 ```
 
 Install one standalone skill:
@@ -82,7 +82,7 @@ npx agentrig skill install claude agentrig/regenrek.gitwhat
 npx agentrig skill install claude agentrig/regenrek.go-local-health
 npx agentrig skill install claude agentrig/regenrek.homebrew-publish
 npx agentrig skill install claude agentrig/regenrek.no-mistakes
-npx agentrig skill install claude agentrig/regenrek.package-security-check
+npx skills add instructa/agent-skills --skill package-security-check --agent claude-code
 npx agentrig skill install claude agentrig/regenrek.redesign-my-landingpage
 npx agentrig skill install claude agentrig/regenrek.security-leak-guardrails
 npx agentrig skill install claude agentrig/regenrek.shellck
@@ -105,9 +105,9 @@ Install one bundled skill:
 npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
 npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
 npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
 npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
 npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:search-context
 ```
 
 Install one standalone skill:
@@ -121,7 +121,7 @@ npx agentrig skill install cursor agentrig/regenrek.gitwhat
 npx agentrig skill install cursor agentrig/regenrek.go-local-health
 npx agentrig skill install cursor agentrig/regenrek.homebrew-publish
 npx agentrig skill install cursor agentrig/regenrek.no-mistakes
-npx agentrig skill install cursor agentrig/regenrek.package-security-check
+npx skills add instructa/agent-skills --skill package-security-check --agent cursor
 npx agentrig skill install cursor agentrig/regenrek.redesign-my-landingpage
 npx agentrig skill install cursor agentrig/regenrek.security-leak-guardrails
 npx agentrig skill install cursor agentrig/regenrek.shellck
@@ -135,12 +135,22 @@ npx agentrig skill install cursor agentrig/regenrek.stage-review
 
 Core agentic engineering skills for architecture, debugging, refactoring, and test ownership. Each bundled skill also has its own `README.md` in the plugin skill folder.
 
+Plugin category: `Development`.
+
+Architecture / Ownership:
+
 - `architecture-ownership`: determine the right runtime, first-fix, and canonical long-term owner.
-- `consolidate-test-suites`: place bug-fix coverage in one owning test layer.
 - `find-duplicate-ownership`: audit duplicate ownership and hidden second sources of truth.
-- `github-reference-context`: find, clone, inspect, and summarize GitHub reference repositories.
 - `hard-cut`: keep one canonical implementation during pre-release refactors.
+
+Debugging / Investigation:
+
 - `root-cause-finder`: trace downstream errors to the first unintended side effect.
+- `search-context`: search external repositories and reference code before guessing.
+
+Testing:
+
+- `consolidate-test-suites`: place bug-fix coverage in one owning test layer.
 
 ### Standalone Skills
 
@@ -154,7 +164,7 @@ These skills are kept as separate artifacts because they are useful independentl
 - `go-local-health`: run local Go test, coverage, and lint health checks.
 - `homebrew-publish`: prepare Homebrew tap formulae for CLI/TUI releases.
 - `no-mistakes`: use the no-mistakes gated push workflow.
-- `package-security-check`: run a reusable JavaScript supply-chain security baseline.
+- `package-security-check`: run a reusable JavaScript supply-chain security baseline. Not published through AgentRig yet; install with `npx skills`.
 - `redesign-my-landingpage`: build and critique shadcn/Vite/Iconify landing pages.
 - `security-leak-guardrails`: add secret-leak prevention guardrails.
 - `shellck`: run shellcheck over shell scripts.
