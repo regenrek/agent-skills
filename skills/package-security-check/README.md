@@ -53,7 +53,7 @@ For incident-specific checks:
 ```bash
 python3 scripts/check_js_supply_chain.py \
   --root <repo-or-workspace-root> \
-  --ioc data/iocs/mini-shai-hulud-2026-05.json
+  --ioc data/iocs/npm-supply-chain-2026-05.json
 ```
 
 ## Policy Notes

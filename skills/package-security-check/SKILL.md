@@ -26,7 +26,7 @@ Use `--strict` when the check should fail on hardening gaps. Use `--json` when a
 ```bash
 python3 scripts/check_js_supply_chain.py \
   --root <repo-or-workspace-root> \
-  --ioc data/iocs/mini-shai-hulud-2026-05.json \
+  --ioc data/iocs/npm-supply-chain-2026-05.json \
   --since 2026-05-11T19:20:00Z
 ```
 

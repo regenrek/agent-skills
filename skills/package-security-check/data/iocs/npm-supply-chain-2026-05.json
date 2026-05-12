@@ -1,7 +1,7 @@
 {
-  "name": "mini-shai-hulud-2026-05",
+  "name": "npm-supply-chain-2026-05",
   "incident_window_start": "2026-05-11T19:20:00Z",
-  "description": "Mini Shai-Hulud npm worm wave reported in May 2026. Use as an optional incident profile, not as the base security policy.",
+  "description": "May 2026 npm supply-chain incident profile. Use as an optional incident profile, not as the base security policy.",
   "fingerprints": [
     "@tanstack/setup",
     "github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c",
