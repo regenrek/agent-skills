@@ -1,6 +1,19 @@
 # Security Leak Guardrails
 
-**If you need a security safety net for your codebase, this skill adds guardrails that catch leaks before they ship.**
+Add secret-leak prevention guardrails with forbidden path checks, gitleaks config, CI secret scanning, and dependency update hygiene.
+
+## Install
+
+```bash
+# Codex
+npx agentrig skill install codex agentrig/regenrek.security-leak-guardrails
+
+# Claude
+npx agentrig skill install claude agentrig/regenrek.security-leak-guardrails
+
+# Cursor
+npx agentrig skill install cursor agentrig/regenrek.security-leak-guardrails
+```
 
 ## Prerequisites
 
@@ -46,6 +59,12 @@ Or reference the skill directly:
 
 > "Use the security-leak-guardrails skill to harden this project"
 
+## Included Resources
+
+- `reference.md` contains templates for forbidden paths, gitleaks, CI, hooks, and Dependabot.
+- `examples.md` contains usage examples.
+- `scripts/secleak-check.sh` runs the local security check once configured.
+
 ## Files Created
 
 ```
@@ -72,3 +91,5 @@ gitleaks git --no-banner --redact=100 --config .gitleaks.toml .
 # Run trivy (if installed)
 trivy fs --scanners secret,misconfig --exit-code 1 .
 ```
+
+See `SKILL.md` for the full agent workflow.

@@ -1,0 +1,3 @@
+display_name: GitHub Reference Context
+short_description: Find, clone, inspect, and summarize high-quality GitHub reference repositories for coding agents.
+default_prompt: Find a few high-quality GitHub reference projects for this feature, clone only the best candidates, inspect relevant files, and write a concise reference manifest.

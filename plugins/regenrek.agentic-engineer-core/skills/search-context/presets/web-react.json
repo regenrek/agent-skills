@@ -1,0 +1,86 @@
+{
+  "id": "web-react",
+  "description": "React, Next.js, Vite, Tailwind and component reference repositories.",
+  "github": {
+    "languages": ["TypeScript", "JavaScript"]
+  },
+  "searchPhrases": [
+    "React component example",
+    "Next.js component example",
+    "Vite React Tailwind component",
+    "React UI pattern TypeScript",
+    "shadcn ui component example"
+  ],
+  "expansions": [
+    {
+      "whenAny": ["progress", "ring", "circular", "indicator"],
+      "phrases": [
+        "React circular progress ring",
+        "React progress ring component",
+        "SVG progress ring React",
+        "Tailwind circular progress React"
+      ]
+    },
+    {
+      "whenAny": ["dashboard", "admin", "analytics"],
+      "phrases": [
+        "React dashboard UI TypeScript",
+        "Next.js dashboard Tailwind",
+        "shadcn dashboard example"
+      ]
+    }
+  ],
+  "inspectTerms": [
+    "progress ring",
+    "CircularProgress",
+    "ProgressRing",
+    "strokeDasharray",
+    "strokeDashoffset",
+    "svg",
+    "motion",
+    "framer-motion",
+    "shadcn",
+    "tailwind"
+  ],
+  "fileGlobs": [
+    "*.tsx",
+    "*.ts",
+    "*.jsx",
+    "*.js",
+    "*.md"
+  ],
+  "positivePathHints": [
+    "example",
+    "examples",
+    "demo",
+    "sample",
+    "preview",
+    "component",
+    "components",
+    "app",
+    "pages",
+    "src",
+    "ui"
+  ],
+  "negativePathHints": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "coverage"
+  ],
+  "study": [
+    "component API",
+    "state handling",
+    "styling tokens",
+    "animation approach",
+    "accessibility attributes",
+    "demo usage"
+  ],
+  "doNotCopy": [
+    "entire app structure",
+    "unrelated package setup",
+    "large code blocks",
+    "theme systems that conflict with the current project"
+  ]
+}

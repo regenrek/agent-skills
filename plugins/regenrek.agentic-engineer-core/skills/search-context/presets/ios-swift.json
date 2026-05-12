@@ -1,0 +1,96 @@
+{
+  "id": "ios-swift",
+  "description": "iOS, Swift, SwiftUI and UIKit reference repositories.",
+  "github": {
+    "languages": ["Swift"]
+  },
+  "searchPhrases": [
+    "SwiftUI progress ring",
+    "SwiftUI circular progress",
+    "iOS progress ring Swift",
+    "CircularProgressView SwiftUI",
+    "activity ring SwiftUI",
+    "CAShapeLayer strokeEnd progress ring",
+    "ProgressViewStyle circular SwiftUI",
+    "Circle trim progress SwiftUI"
+  ],
+  "expansions": [
+    {
+      "whenAny": ["progress", "ring", "circular", "indicator", "activity"],
+      "phrases": [
+        "SwiftUI progress ring",
+        "SwiftUI circular progress",
+        "CircularProgressView SwiftUI",
+        "Circle trim progress SwiftUI",
+        "activity ring SwiftUI",
+        "CAShapeLayer strokeEnd progress ring",
+        "ProgressViewStyle circular SwiftUI"
+      ]
+    },
+    {
+      "whenAny": ["animation", "animate", "animated"],
+      "phrases": [
+        "SwiftUI animated progress",
+        "SwiftUI animation progress ring",
+        "iOS animated circular progress Swift"
+      ]
+    }
+  ],
+  "inspectTerms": [
+    "Circle().trim",
+    ".trim(from:",
+    "ProgressViewStyle",
+    "CircularProgress",
+    "ProgressRing",
+    "progress ring",
+    "circular progress",
+    "strokeEnd",
+    "CAShapeLayer",
+    "withAnimation",
+    "TimelineView",
+    "Canvas",
+    "Animatable",
+    "Gauge",
+    "trim(from:"
+  ],
+  "fileGlobs": [
+    "*.swift",
+    "*.md"
+  ],
+  "positivePathHints": [
+    "example",
+    "examples",
+    "demo",
+    "sample",
+    "preview",
+    "sources",
+    "source",
+    "view",
+    "views",
+    "component",
+    "components",
+    "progress",
+    "ring"
+  ],
+  "negativePathHints": [
+    "pods",
+    "carthage",
+    "deriveddata",
+    "build",
+    "docs/generated"
+  ],
+  "study": [
+    "ring drawing model",
+    "progress value binding",
+    "stroke styling and rounded caps",
+    "animation timing",
+    "SwiftUI vs UIKit tradeoffs",
+    "preview and demo usage"
+  ],
+  "doNotCopy": [
+    "entire app architecture",
+    "unrelated theme systems",
+    "large code blocks",
+    "old dependency setup"
+  ]
+}

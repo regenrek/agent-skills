@@ -1,0 +1,70 @@
+{
+  "id": "generic",
+  "description": "Generic GitHub reference search when stack or platform is unknown.",
+  "github": {
+    "languages": []
+  },
+  "searchPhrases": [
+    "example implementation",
+    "reference implementation",
+    "demo project",
+    "sample project"
+  ],
+  "expansions": [],
+  "inspectTerms": [
+    "example",
+    "demo",
+    "sample",
+    "implementation",
+    "component",
+    "view",
+    "service",
+    "handler"
+  ],
+  "fileGlobs": [
+    "*.md",
+    "*.ts",
+    "*.tsx",
+    "*.js",
+    "*.jsx",
+    "*.swift",
+    "*.kt",
+    "*.java",
+    "*.py",
+    "*.go",
+    "*.rs"
+  ],
+  "positivePathHints": [
+    "example",
+    "examples",
+    "demo",
+    "sample",
+    "samples",
+    "src",
+    "source",
+    "lib",
+    "app"
+  ],
+  "negativePathHints": [
+    "node_modules",
+    "vendor",
+    "dist",
+    "build",
+    "target",
+    ".next",
+    "coverage"
+  ],
+  "study": [
+    "core implementation pattern",
+    "API design",
+    "state flow",
+    "error handling",
+    "example usage"
+  ],
+  "doNotCopy": [
+    "entire app architecture",
+    "large code blocks",
+    "license-restricted content",
+    "unrelated setup"
+  ]
+}

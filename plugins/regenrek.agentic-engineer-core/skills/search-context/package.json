@@ -1,0 +1,15 @@
+{
+  "name": "github-reference-context-skill",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Agent skill and dependency-free CLI for building GitHub reference context manifests.",
+  "bin": {
+    "search-context": "./scripts/search-context.mjs"
+  },
+  "scripts": {
+    "check": "node ./scripts/search-context.mjs check",
+    "help": "node ./scripts/search-context.mjs help"
+  },
+  "dependencies": {}
+}
