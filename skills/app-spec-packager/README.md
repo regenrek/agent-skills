@@ -6,13 +6,13 @@ Create production-ready Markdown specification packages for apps, SaaS products,
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.app-spec-packager
+npx skills add instructa/agent-skills --skill app-spec-packager --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.app-spec-packager
+# Claude Code
+npx skills add instructa/agent-skills --skill app-spec-packager --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.app-spec-packager
+npx skills add instructa/agent-skills --skill app-spec-packager --agent cursor
 ```
 
 ## Use When

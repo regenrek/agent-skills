@@ -6,13 +6,13 @@ Stage a finished feature, run local verification, create a Conventional Commit, 
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.stage-review
+npx skills add instructa/agent-skills --skill stage-review --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.stage-review
+# Claude Code
+npx skills add instructa/agent-skills --skill stage-review --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.stage-review
+npx skills add instructa/agent-skills --skill stage-review --agent cursor
 ```
 
 ## Required Companion
@@ -21,13 +21,13 @@ This workflow depends on the `no-mistakes` gate. Install the companion skill too
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill no-mistakes --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.no-mistakes
+# Claude Code
+npx skills add instructa/agent-skills --skill no-mistakes --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill no-mistakes --agent cursor
 ```
 
 The target repo also needs the `no-mistakes` CLI and a `no-mistakes` remote before the final gated push can run.

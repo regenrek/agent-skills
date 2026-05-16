@@ -6,13 +6,13 @@ Decide where bug-fix coverage belongs and keep each invariant in one owning test
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
+# Claude Code
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent cursor
 ```
 
 ## Use When

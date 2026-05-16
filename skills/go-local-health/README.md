@@ -6,13 +6,13 @@ Run repeatable local Go test, coverage, and lint checks for repositories that co
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.go-local-health
+npx skills add instructa/agent-skills --skill go-local-health --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.go-local-health
+# Claude Code
+npx skills add instructa/agent-skills --skill go-local-health --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.go-local-health
+npx skills add instructa/agent-skills --skill go-local-health --agent cursor
 ```
 
 ## Use When

@@ -6,13 +6,13 @@ Create a new GitHub repository and bootstrap a matching local project with git, 
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.gh-repo-bootstrap
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.gh-repo-bootstrap
+# Claude Code
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.gh-repo-bootstrap
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent cursor
 ```
 
 ## Use When

@@ -6,13 +6,13 @@ Build, critique, and iterate high-converting landing pages using React, Vite, Ty
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.redesign-my-landingpage
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.redesign-my-landingpage
+# Claude Code
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.redesign-my-landingpage
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent cursor
 ```
 
 ## Use When

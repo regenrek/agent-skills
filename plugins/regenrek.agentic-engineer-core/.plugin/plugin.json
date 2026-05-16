@@ -15,6 +15,14 @@
     "ownership",
     "agentic-engineering"
   ],
+  "skills": [
+    "architecture-ownership",
+    "consolidate-test-suites",
+    "find-duplicate-ownership",
+    "hard-cut",
+    "root-cause-finder",
+    "search-context"
+  ],
   "x-agentrig": {
     "displayName": "Agentic Engineer Core",
     "kind": "plugin",

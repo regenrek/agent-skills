@@ -1,131 +1,120 @@
 # Agent Skills
 
-A curated source repo for AgentRig plugins and standalone skills.
+A curated source repo for agent skills and plugin bundles.
 
-This repo is organized around AgentRig distribution instead of local sync scripts:
+This repo is organized around the open Agent Skills CLI (`npx skills`) instead of local sync scripts:
 
-- `plugins/`: installable AgentRig plugin bundles.
-- `skills/`: standalone skills that can be listed and installed independently.
+- `plugins/`: plugin manifests that bundle a set of top-level skills (AgentRig distribution is not ready yet — install bundled skills individually for now).
+- `skills/`: all installable skills, both standalone and the ones referenced by a plugin bundle. Each can be listed and installed independently.
 - `internal/`: personal or experimental workflows that are not part of the public install surface.
 
 ## Install
 
-Use `--pick` when installing skills from a plugin bundle. Standalone skill refs already point at one skill, so they install without `--pick`.
+Use the open Agent Skills CLI. List everything in the repo, then install per skill:
+
+```bash
+# List skills in this repo
+npx skills add instructa/agent-skills --list
+```
+
+Use `-g` for a global install, or omit it for a project-local install. Add `--copy` if you prefer copied files instead of symlinks.
 
 <details>
 <summary>Codex</summary>
 
-Install the full engineering plugin:
+Install bundled skills from `regenrek.agentic-engineer-core`:
 
 ```bash
-npx agentrig plugin install codex agentrig/regenrek.agentic-engineer-core
-```
-
-Install one bundled skill:
-
-```bash
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:search-context
+npx skills add instructa/agent-skills --skill architecture-ownership --agent codex
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent codex
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent codex
+npx skills add instructa/agent-skills --skill hard-cut --agent codex
+npx skills add instructa/agent-skills --skill root-cause-finder --agent codex
+npx skills add instructa/agent-skills --skill search-context --agent codex
 ```
 
 Install one standalone skill:
 
 ```bash
-npx agentrig skill install codex agentrig/regenrek.app-spec-packager
-npx agentrig skill install codex agentrig/regenrek.debug-lldb
-npx agentrig skill install codex agentrig/regenrek.gh-repo-bootstrap
-npx agentrig skill install codex agentrig/regenrek.git-safe-workflow
-npx agentrig skill install codex agentrig/regenrek.gitwhat
-npx agentrig skill install codex agentrig/regenrek.go-local-health
-npx agentrig skill install codex agentrig/regenrek.homebrew-publish
-npx agentrig skill install codex agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill app-spec-packager --agent codex
+npx skills add instructa/agent-skills --skill debug-lldb --agent codex
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent codex
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent codex
+npx skills add instructa/agent-skills --skill gitwhat --agent codex
+npx skills add instructa/agent-skills --skill go-local-health --agent codex
+npx skills add instructa/agent-skills --skill homebrew-publish --agent codex
+npx skills add instructa/agent-skills --skill no-mistakes --agent codex
 npx skills add instructa/agent-skills --skill package-security-check --agent codex
-npx agentrig skill install codex agentrig/regenrek.redesign-my-landingpage
-npx agentrig skill install codex agentrig/regenrek.security-leak-guardrails
-npx agentrig skill install codex agentrig/regenrek.shellck
-npx agentrig skill install codex agentrig/regenrek.stage-review
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent codex
+npx skills add instructa/agent-skills --skill secleak-check --agent codex
+npx skills add instructa/agent-skills --skill shellck --agent codex
+npx skills add instructa/agent-skills --skill stage-review --agent codex
 ```
 </details>
 
 <details>
-<summary>Claude</summary>
+<summary>Claude Code</summary>
 
-Install the full engineering plugin:
-
-```bash
-npx agentrig plugin install claude agentrig/regenrek.agentic-engineer-core
-```
-
-Install one bundled skill:
+Install bundled skills from `regenrek.agentic-engineer-core`:
 
 ```bash
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:search-context
+npx skills add instructa/agent-skills --skill architecture-ownership --agent claude-code
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent claude-code
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent claude-code
+npx skills add instructa/agent-skills --skill hard-cut --agent claude-code
+npx skills add instructa/agent-skills --skill root-cause-finder --agent claude-code
+npx skills add instructa/agent-skills --skill search-context --agent claude-code
 ```
 
 Install one standalone skill:
 
 ```bash
-npx agentrig skill install claude agentrig/regenrek.app-spec-packager
-npx agentrig skill install claude agentrig/regenrek.debug-lldb
-npx agentrig skill install claude agentrig/regenrek.gh-repo-bootstrap
-npx agentrig skill install claude agentrig/regenrek.git-safe-workflow
-npx agentrig skill install claude agentrig/regenrek.gitwhat
-npx agentrig skill install claude agentrig/regenrek.go-local-health
-npx agentrig skill install claude agentrig/regenrek.homebrew-publish
-npx agentrig skill install claude agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill app-spec-packager --agent claude-code
+npx skills add instructa/agent-skills --skill debug-lldb --agent claude-code
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent claude-code
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent claude-code
+npx skills add instructa/agent-skills --skill gitwhat --agent claude-code
+npx skills add instructa/agent-skills --skill go-local-health --agent claude-code
+npx skills add instructa/agent-skills --skill homebrew-publish --agent claude-code
+npx skills add instructa/agent-skills --skill no-mistakes --agent claude-code
 npx skills add instructa/agent-skills --skill package-security-check --agent claude-code
-npx agentrig skill install claude agentrig/regenrek.redesign-my-landingpage
-npx agentrig skill install claude agentrig/regenrek.security-leak-guardrails
-npx agentrig skill install claude agentrig/regenrek.shellck
-npx agentrig skill install claude agentrig/regenrek.stage-review
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent claude-code
+npx skills add instructa/agent-skills --skill secleak-check --agent claude-code
+npx skills add instructa/agent-skills --skill shellck --agent claude-code
+npx skills add instructa/agent-skills --skill stage-review --agent claude-code
 ```
 </details>
 
 <details>
 <summary>Cursor</summary>
 
-Install the full engineering plugin:
+Install bundled skills from `regenrek.agentic-engineer-core`:
 
 ```bash
-npx agentrig plugin install cursor agentrig/regenrek.agentic-engineer-core
-```
-
-Install one bundled skill:
-
-```bash
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:consolidate-test-suites
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:search-context
+npx skills add instructa/agent-skills --skill architecture-ownership --agent cursor
+npx skills add instructa/agent-skills --skill consolidate-test-suites --agent cursor
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent cursor
+npx skills add instructa/agent-skills --skill hard-cut --agent cursor
+npx skills add instructa/agent-skills --skill root-cause-finder --agent cursor
+npx skills add instructa/agent-skills --skill search-context --agent cursor
 ```
 
 Install one standalone skill:
 
 ```bash
-npx agentrig skill install cursor agentrig/regenrek.app-spec-packager
-npx agentrig skill install cursor agentrig/regenrek.debug-lldb
-npx agentrig skill install cursor agentrig/regenrek.gh-repo-bootstrap
-npx agentrig skill install cursor agentrig/regenrek.git-safe-workflow
-npx agentrig skill install cursor agentrig/regenrek.gitwhat
-npx agentrig skill install cursor agentrig/regenrek.go-local-health
-npx agentrig skill install cursor agentrig/regenrek.homebrew-publish
-npx agentrig skill install cursor agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill app-spec-packager --agent cursor
+npx skills add instructa/agent-skills --skill debug-lldb --agent cursor
+npx skills add instructa/agent-skills --skill gh-repo-bootstrap --agent cursor
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent cursor
+npx skills add instructa/agent-skills --skill gitwhat --agent cursor
+npx skills add instructa/agent-skills --skill go-local-health --agent cursor
+npx skills add instructa/agent-skills --skill homebrew-publish --agent cursor
+npx skills add instructa/agent-skills --skill no-mistakes --agent cursor
 npx skills add instructa/agent-skills --skill package-security-check --agent cursor
-npx agentrig skill install cursor agentrig/regenrek.redesign-my-landingpage
-npx agentrig skill install cursor agentrig/regenrek.security-leak-guardrails
-npx agentrig skill install cursor agentrig/regenrek.shellck
-npx agentrig skill install cursor agentrig/regenrek.stage-review
+npx skills add instructa/agent-skills --skill redesign-my-landingpage --agent cursor
+npx skills add instructa/agent-skills --skill secleak-check --agent cursor
+npx skills add instructa/agent-skills --skill shellck --agent cursor
+npx skills add instructa/agent-skills --skill stage-review --agent cursor
 ```
 </details>
 
@@ -133,7 +122,7 @@ npx agentrig skill install cursor agentrig/regenrek.stage-review
 
 ### `regenrek.agentic-engineer-core`
 
-Core agentic engineering skills for architecture, debugging, refactoring, and test ownership. Each bundled skill also has its own `README.md` in the plugin skill folder.
+Core agentic engineering skills for architecture, debugging, refactoring, and test ownership. Bundled skills live in the top-level `skills/` folder; the plugin manifest (`plugins/regenrek.agentic-engineer-core/.plugin/plugin.json`) declares which ones are part of the bundle. Each skill also has its own `README.md`.
 
 Plugin category: `Development`.
 
@@ -164,9 +153,9 @@ These skills are kept as separate artifacts because they are useful independentl
 - `go-local-health`: run local Go test, coverage, and lint health checks.
 - `homebrew-publish`: prepare Homebrew tap formulae for CLI/TUI releases.
 - `no-mistakes`: use the no-mistakes gated push workflow.
-- `package-security-check`: run a reusable JavaScript supply-chain security baseline. Not published through AgentRig yet; install with `npx skills`.
+- `package-security-check`: run a reusable JavaScript supply-chain security baseline.
 - `redesign-my-landingpage`: build and critique shadcn/Vite/Iconify landing pages.
-- `security-leak-guardrails`: add secret-leak prevention guardrails.
+- `secleak-check`: run BetterLeaks/Trivy scans and add secret-leak guardrails.
 - `shellck`: run shellcheck over shell scripts.
 - `stage-review`: commit a finished feature locally, then run it through no-mistakes.
 
@@ -175,13 +164,18 @@ These skills are kept as separate artifacts because they are useful independentl
 ```text
 plugins/
   regenrek.agentic-engineer-core/
-    .plugin/plugin.json
+    .plugin/plugin.json   # declares which top-level skills are in the bundle
     README.md
-    skills/
 
 skills/
   app-spec-packager/
+  architecture-ownership/    # bundled in regenrek.agentic-engineer-core
+  consolidate-test-suites/   # bundled in regenrek.agentic-engineer-core
   debug-lldb/
+  find-duplicate-ownership/  # bundled in regenrek.agentic-engineer-core
+  hard-cut/                  # bundled in regenrek.agentic-engineer-core
+  root-cause-finder/         # bundled in regenrek.agentic-engineer-core
+  search-context/            # bundled in regenrek.agentic-engineer-core
   ...
 
 internal/

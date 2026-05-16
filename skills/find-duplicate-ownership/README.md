@@ -6,13 +6,13 @@ Find duplicate ownership, hidden second sources of truth, and contract drift in 
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
+# Claude Code
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:find-duplicate-ownership
+npx skills add instructa/agent-skills --skill find-duplicate-ownership --agent cursor
 ```
 
 ## Use When

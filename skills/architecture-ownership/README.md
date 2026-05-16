@@ -6,13 +6,13 @@ Determine runtime owner, first-fix layer, and canonical long-term owner in layer
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
+npx skills add instructa/agent-skills --skill architecture-ownership --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
+# Claude Code
+npx skills add instructa/agent-skills --skill architecture-ownership --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:architecture-ownership
+npx skills add instructa/agent-skills --skill architecture-ownership --agent cursor
 ```
 
 ## Use When

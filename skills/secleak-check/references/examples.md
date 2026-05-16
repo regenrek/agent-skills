@@ -32,7 +32,7 @@ Add Terraform state and plan files:
 
 ## Example D: Allowlist for fixtures only
 
-Use path-based allowlist entries in .gitleaks.toml:
+Use path-based filters in `.betterleaks.toml`:
 
 ```
 [allowlist]

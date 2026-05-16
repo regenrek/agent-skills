@@ -6,13 +6,13 @@ Create or update Homebrew tap repositories and formulae for CLI and TUI releases
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.homebrew-publish
+npx skills add instructa/agent-skills --skill homebrew-publish --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.homebrew-publish
+# Claude Code
+npx skills add instructa/agent-skills --skill homebrew-publish --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.homebrew-publish
+npx skills add instructa/agent-skills --skill homebrew-publish --agent cursor
 ```
 
 ## Use When

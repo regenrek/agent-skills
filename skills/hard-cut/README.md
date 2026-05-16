@@ -6,13 +6,13 @@ Keep one canonical implementation and delete compatibility, fallback, shim, coer
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
+npx skills add instructa/agent-skills --skill hard-cut --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
+# Claude Code
+npx skills add instructa/agent-skills --skill hard-cut --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:hard-cut
+npx skills add instructa/agent-skills --skill hard-cut --agent cursor
 ```
 
 ## Use When

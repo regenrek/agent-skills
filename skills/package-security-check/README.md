@@ -4,7 +4,7 @@ Run a JavaScript supply-chain security baseline with pnpm-first hardening, relea
 
 ## Install
 
-This skill is not published through AgentRig yet. Install it with the open Agent Skills CLI:
+Install with the open Agent Skills CLI:
 
 ```bash
 # List skills in this repo

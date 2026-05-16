@@ -6,13 +6,13 @@ Safely inspect, stage, commit, and push only when explicitly requested, without 
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.git-safe-workflow
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.git-safe-workflow
+# Claude Code
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.git-safe-workflow
+npx skills add instructa/agent-skills --skill git-safe-workflow --agent cursor
 ```
 
 ## Use When

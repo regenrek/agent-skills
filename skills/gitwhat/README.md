@@ -6,13 +6,13 @@ Print a compact git workspace snapshot for the current directory.
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.gitwhat
+npx skills add instructa/agent-skills --skill gitwhat --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.gitwhat
+# Claude Code
+npx skills add instructa/agent-skills --skill gitwhat --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.gitwhat
+npx skills add instructa/agent-skills --skill gitwhat --agent cursor
 ```
 
 ## Use When

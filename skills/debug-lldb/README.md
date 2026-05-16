@@ -6,13 +6,13 @@ Capture and analyze thread backtraces to debug hangs, deadlocks, UI freezes, IPC
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.debug-lldb
+npx skills add instructa/agent-skills --skill debug-lldb --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.debug-lldb
+# Claude Code
+npx skills add instructa/agent-skills --skill debug-lldb --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.debug-lldb
+npx skills add instructa/agent-skills --skill debug-lldb --agent cursor
 ```
 
 ## Use When

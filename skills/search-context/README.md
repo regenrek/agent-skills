@@ -6,13 +6,13 @@ Find, clone, inspect, and summarize high-quality GitHub reference repositories f
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
+npx skills add instructa/agent-skills --skill search-context --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
+# Claude Code
+npx skills add instructa/agent-skills --skill search-context --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:github-reference-context
+npx skills add instructa/agent-skills --skill search-context --agent cursor
 ```
 
 ## Use When

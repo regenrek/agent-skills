@@ -6,13 +6,13 @@ Run ShellCheck on shell scripts after editing scripts or when debugging shell er
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.shellck
+npx skills add instructa/agent-skills --skill shellck --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.shellck
+# Claude Code
+npx skills add instructa/agent-skills --skill shellck --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.shellck
+npx skills add instructa/agent-skills --skill shellck --agent cursor
 ```
 
 ## Use When

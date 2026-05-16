@@ -6,13 +6,13 @@ Trace expected behavior to the first unintended side effect before changing cont
 
 ```bash
 # Codex
-npx agentrig install codex agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+npx skills add instructa/agent-skills --skill root-cause-finder --agent codex
 
-# Claude
-npx agentrig install claude agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+# Claude Code
+npx skills add instructa/agent-skills --skill root-cause-finder --agent claude-code
 
 # Cursor
-npx agentrig install cursor agentrig/regenrek.agentic-engineer-core --pick skill:root-cause-finder
+npx skills add instructa/agent-skills --skill root-cause-finder --agent cursor
 ```
 
 ## Use When

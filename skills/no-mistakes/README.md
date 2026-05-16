@@ -6,13 +6,13 @@ Use the `no-mistakes` gated push workflow for finished feature branches.
 
 ```bash
 # Codex
-npx agentrig skill install codex agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill no-mistakes --agent codex
 
-# Claude
-npx agentrig skill install claude agentrig/regenrek.no-mistakes
+# Claude Code
+npx skills add instructa/agent-skills --skill no-mistakes --agent claude-code
 
 # Cursor
-npx agentrig skill install cursor agentrig/regenrek.no-mistakes
+npx skills add instructa/agent-skills --skill no-mistakes --agent cursor
 ```
 
 ## Use When

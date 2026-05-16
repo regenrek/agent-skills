@@ -1,4 +1,4 @@
-# Security Leak Guardrails Templates
+# Secleak Check Guardrail Templates
 
 Use these templates as a starting point. Customize runtime directories and allowlists to match each repo.
 
@@ -144,30 +144,41 @@ pre-push:
     #   run: pnpm security:check
 ```
 
-## .gitleaks.toml
+## .betterleaks.toml
 
 ```
-# Gitleaks configuration
+# BetterLeaks configuration
 
-title = "repo gitleaks config"
+title = "repo betterleaks config"
 
-[extend]
-useDefault = true
+prefilter = '''
+matchesAny(attributes[?"path"].orValue(""), [
+  r"""(?:^|/)node_modules(?:/.*)?$""",
+  r"""(?:^|/)dist(?:/.*)?$""",
+  r"""(?:^|/)target(?:/.*)?$"""
+])
+'''
 
-[allowlist]
-description = "Allow test fixtures only"
-paths = [
-  '''tests/fixtures/''',
-]
-regexes = [
-  '''EXAMPLE_.*_KEY''',
-]
+filter = '''
+containsAny(finding["secret"], [
+  "EXAMPLE",
+  "CHANGEME",
+  "YOUR_API_KEY_HERE"
+])
+'''
 
 [[rules]]
 id = "ssh-test-headers"
-description = "Allow SSH PEM headers in test files"
+description = "SSH PEM headers in non-fixture files"
 regex = '''-----BEGIN (OPENSSH |RSA )?PRIVATE KEY-----'''
-allowlist = { paths = ['''.*\\.test\\.ts$''', '''.*\\.spec\\.ts$''', '''.*fixtures.*'''] }
+keywords = ["PRIVATE KEY"]
+filter = '''
+matchesAny(attributes[?"path"].orValue(""), [
+  r""".*\.test\.ts$""",
+  r""".*\.spec\.ts$""",
+  r""".*fixtures.*"""
+])
+'''
 ```
 
 ## scripts/secleak-check.sh
@@ -180,16 +191,23 @@ echo "=== Security Check ==="
 
 ERRORS=0
 
-if command -v gitleaks >/dev/null 2>&1; then
-  echo "Running gitleaks..."
-  if gitleaks git --no-banner --redact=100 --config .gitleaks.toml .; then
-    echo "gitleaks: OK"
+if command -v betterleaks >/dev/null 2>&1; then
+  echo "Running betterleaks..."
+  BETTERLEAKS_ARGS=(git --no-banner --redact=100)
+  if [ -f .betterleaks.toml ]; then
+    BETTERLEAKS_ARGS+=(--config .betterleaks.toml)
+  elif [ -f .gitleaks.toml ]; then
+    BETTERLEAKS_ARGS+=(--config .gitleaks.toml)
+  fi
+  BETTERLEAKS_ARGS+=(.)
+  if betterleaks "${BETTERLEAKS_ARGS[@]}"; then
+    echo "betterleaks: OK"
   else
-    echo "gitleaks: FAIL"
+    echo "betterleaks: FAIL"
     ERRORS=$((ERRORS + 1))
   fi
 else
-  echo "gitleaks not installed, skipping"
+  echo "betterleaks not installed, skipping"
 fi
 
 if command -v trivy >/dev/null 2>&1; then
@@ -256,8 +274,8 @@ jobs:
           head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           extra_args: --only-verified
 
-  gitleaks:
-    name: Gitleaks
+  betterleaks:
+    name: BetterLeaks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -265,11 +283,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Gitleaks
-        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: .gitleaks.toml
+      - name: Install BetterLeaks
+        run: |
+          set -euo pipefail
+          version="1.2.0"
+          archive="betterleaks_${version}_linux_x64.tar.gz"
+          checksum="5476c1ad776bc884e2b9796f08a44be5a80666833c2987d3d4aadc39cdc6775e"
+          curl -fsSL "https://github.com/betterleaks/betterleaks/releases/download/v${version}/${archive}" -o "/tmp/${archive}"
+          echo "${checksum}  /tmp/${archive}" | sha256sum -c -
+          tar -xzf "/tmp/${archive}" -C /tmp
+          sudo install -m 0755 /tmp/betterleaks /usr/local/bin/betterleaks
+          betterleaks --version
+
+      - name: BetterLeaks
+        run: |
+          set -euo pipefail
+          args=(git --no-banner --redact=100)
+          if [ -f .betterleaks.toml ]; then
+            args+=(--config .betterleaks.toml)
+          elif [ -f .gitleaks.toml ]; then
+            args+=(--config .gitleaks.toml)
+          fi
+          args+=(.)
+          betterleaks "${args[@]}"
 ```
 
 ## .github/dependabot.yml
